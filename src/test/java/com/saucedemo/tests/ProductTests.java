@@ -5,7 +5,7 @@ import com.saucedemo.pages.CartPage;
 import com.saucedemo.pages.ProductsPage;
 import org.testng.annotations.Test;
 
-public class ProductTest extends TestBase {
+public class ProductTests extends TestBase {
 
     @Test
     public void verifyAddToCartFunctionalityForOneProduct(){
@@ -78,44 +78,42 @@ public class ProductTest extends TestBase {
     @Test
     public void verifyShoppingCartButtonFunctionality(){
         loginAsStandardUser();
-        ProductsPage productsPage=new ProductsPage(webDriver);
-        productsPage.clickCart();
-        CartPage cartPage = new CartPage(webDriver);
-        cartPage.verifyNavigationToCartPage();
+        goToCartPage();
+        verifyCartPageLoadedSuccessfully();
     }
 
     private static void verifyClickingProductImageRedirectToCorrectProductDetailPage() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.verifyProductImageRedirectToProductDetailPage();
+        productsPage.checkProductImageRedirectToProductDetailPage();
     }
 
     private static void verifyClickingProductTitleRedirectToCorrectProductDetailPage() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.verifyProductTitleRedirectToProductDetailPage();
+        productsPage.checkProductTitleRedirectToProductDetailPage();
     }
 
 
     private static void verifyProductsReorderedLowToHigh() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.clickPriceLowToHigh().verifyProductsSortedLowToHighPrices();
+        productsPage.clickPriceLowToHigh().checkProductsSortedLowToHighPrices();
     }
 
 
     private static void verifyProductsReorderedHighToLow() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.clickPriceHighToLow().verifyProductsSortedHighToLowPrices();
+        productsPage.clickPriceHighToLow().checkProductsSortedHighToLowPrices();
     }
 
 
     private static void verifyProductsAreReorderedZtoA() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.clickNameZToA().verifyProductsSortedZToA();
+        productsPage.clickNameZToA().checkProductsSortedZToA();
     }
 
 
     private static void verifyProductAreReorderedAtoZ() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.clickNameAToZ().verifyProductsSortedAToZ();
+        productsPage.clickNameAToZ().checkProductsSortedAToZ();
     }
 
     private static void verifyCartBadgeCountDeductedByRemovedCount() {
@@ -126,52 +124,42 @@ public class ProductTest extends TestBase {
 
     private static void verifyProductsSuccessfullyRemovedFromCart() {
         CartPage cartPage=new CartPage(webDriver);
-        cartPage.verifyCartHasNoItems();
-    }
-
-    private static void verifyProductIsRemovedFromTheCart() {
-        CartPage cartPage=new CartPage(webDriver);
-        cartPage.verifyCartItemsDeductByOne();
-    }
-
-    private static void goToCartPage() {
-        ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.clickCart();
+        cartPage.checkCartIsEmpty();
     }
 
     private static void verifyCartBadgeCountDeductedByOne() {
         ProductsPage productsPage=new ProductsPage(webDriver);
         productsPage.addProductToCart().removeOneProduct();
-        productsPage.verifyRemoveOneProductUpdateInCartBadge();
+        productsPage.checkRemoveOneProductUpdateInCartBadge();
     }
 
     private static void verifyAllAddedProductsDisplayInTheCart() {
         ProductsPage productsPage=new ProductsPage(webDriver);
-        productsPage.verifyAllProductsAddedToTheCart();
+        productsPage.checkAllProductsAddedToTheCart();
     }
 
     private static void verifyCartBadgeReflectTheAddedProductCount() {
         ProductsPage productsPage=new ProductsPage(webDriver);
-        productsPage.verifyCartBadgeUpdate();
+        productsPage.checkCartBadgeisUpdated();
     }
 
     private static void verifyAllAddToCartButtonStateChangeToRemove() {
         ProductsPage productsPage=new ProductsPage(webDriver);
-        productsPage.addProductToCart().verifyAllAddToCartConvertRemoveButtons();
+        productsPage.addProductToCart().checkAllAddToCartConvertRemoveButtons();
     }
 
     private static void verifyAddedProductDisplayInTheCart() {
         ProductsPage productsPage=new ProductsPage(webDriver);
-        productsPage.verifyProductIsAddedToTheCart();
+        productsPage.checkProductIsAddedToTheCart();
     }
 
     private static void verifyCartBadgeUpdateToOne() {
         ProductsPage productsPage=new ProductsPage(webDriver);
-        productsPage.verifyCartBadgeIsOne();
+        productsPage.checkCartBadgeIsOne();
     }
 
     private static void verifyAddToCartButtonChangeToRemoveState() {
         ProductsPage productsPage=new ProductsPage(webDriver);
-        productsPage.addSpecificProductToCart().verifyAddToCartConvertToRemove();
+        productsPage.addSpecificProductToCart().checkAddToCartConvertToRemove();
     }
 }

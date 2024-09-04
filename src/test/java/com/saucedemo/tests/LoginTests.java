@@ -4,12 +4,11 @@ import com.saucedemo.TestBase;
 import com.saucedemo.pages.HomePage;
 import com.saucedemo.pages.ProductsPage;
 import com.saucedemo.pages.LoginPage;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class LoginTest extends TestBase {
+public class LoginTests extends TestBase {
 
     @Test
     public void verifyLoginWithValidCredentials(){
@@ -210,11 +209,6 @@ public class LoginTest extends TestBase {
     private static void verifyAddToCartButtonsFunctionProperly() {
         ProductsPage productsPage = new ProductsPage(webDriver);
         productsPage.verifyAddToCartBtnMalfunction();
-    }
-
-    private static void verifyProductPageLoadedSuccessfully() {
-        ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.verifySuccessNavigationToProductPage();
     }
 
     private static void verifyLoginPageLoadedSuccessfully() {
