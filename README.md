@@ -9,7 +9,7 @@ The automated testing solution covers a wide range of functionalities on the Sau
 ### Key Features
 
 - **Page Object Model (POM):** Structuring of pages for maintainable code.
-- **PageFactory:** Used for initializing web elements, enhancing readability and maintainability.
+- **PageFactory:** Used for initializing web elements, and enhancing readability and maintainability.
 - **WebDriverManager:** Manages browser drivers automatically.
 - **Assertions with AssertJ:** Simplifies and enhances verification steps.
 - **Java Faker:** Generates dynamic test data for checkout processes.
@@ -28,9 +28,3 @@ Detailed documentation of each test case can be found in the [Test Case Document
 - Apache Maven 
 - IntelliJ IDEA 
 - Installed Browsers (Chrome, MicrosoftEdge, etc.)
-
-## Installation & Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
