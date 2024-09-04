@@ -1,0 +1,37 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Saucedemo Test Suite" parallel="false" thread-count="10">
+<!--    reportng report-->
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+    <test name="chrome-tests" enabled="true">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.saucedemo.tests.LoginTest">
+                <methods>
+                    <include name="verifyLoginWithValidCredentials"/>
+                    <include name="verifyLoginWithInvalidUsername"/>
+                    <include name="verifyLoginWithInvalidPassword"/>
+                    <include name="verifyLoginWithInvalidCredentials"/>
+                    <include name="verifyLoginWithLockedUserCredentials"/>
+                    <include name="verifyLoginWithProblemUserCredentials"/>
+                    <include name="verifyLoginWithPerformanceGlitchUserCredentials"/>
+                    <include name="verifyLoginWithVisualUserCredentials"/>
+                    <include name="verifyLoginWithErrorUserCredentials"/>
+                    <include name="verifyLogoutFunctionality"/>
+                    <include name="verifyResetAppStateFunctionality"/>
+                    <include name="verifyAllItemFunctionality"/>
+                    <include name="verifyAboutFunctionality"/>
+                </methods>
+            </class>
+<!--            <class name="com.saucedemo.tests.ProductTest">-->
+<!--                <methods>-->
+<!--                    <include name="verifyAddToCartFunctionalityForOneProduct"/>-->
+<!--                    <include name="verifyAddToCartFunctionalityForMultipleProducts"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+        </classes>
+    </test>
+</suite>
