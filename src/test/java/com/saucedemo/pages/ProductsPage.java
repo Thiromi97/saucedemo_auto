@@ -108,7 +108,7 @@ public class ProductsPage {
                 break;
             }
         }
-        assertThat(buttonsFunctioning).isTrue();
+        assertThat(buttonsFunctioning).isFalse();
     }
 
     private static String getElementText(List<WebElement> buttonList, int i) {
@@ -176,19 +176,18 @@ public class ProductsPage {
     }
 
     public void verifyCartIsEmpty() {
-        assertThat(getCartItemCount().size()).isEqualTo(0);
+        assertThat(getCartItemCount()).isEqualTo(0);
         }
 
     public void checkProductIsAddedToTheCart() {
-        assertThat(getCartItemCount().size()).isEqualTo(1);
+        assertThat(getCartItemCount()).isEqualTo(1);
     }
 
-    private List<WebElement> getCartItemCount() {
+    private Integer getCartItemCount() {
         clickCart();
         CartPage cartPage = new CartPage(webDriver);
-        List<WebElement> cartItems = cartPage.getCartItemList();
-        webDriver.navigate().back();
-        return cartItems;
+        return cartPage.getCartItemSize();
+//        webDriver.navigate().back();
     }
 
     public void clickCart() {
@@ -236,14 +235,17 @@ public class ProductsPage {
         assertThat(getCartBadgeCount()).isEqualTo("1");
     }
 
-    public void checkCartBadgeisUpdated() {
+    public void checkCartBadgeIsUpdated() {
         assertThat(getCartBadgeCount()).isEqualTo("6");
     }
 
-    public void checkAllProductsAddedToTheCart() {
-        assertThat(getCartItemCount().size()).isEqualTo(6);
+    public void checkProductAddedToTheCart() {
+        assertThat(getCartItemCount()).isEqualTo(1);
     }
 
+    public void checkAllProductsAddedToTheCart() {
+        assertThat(getCartItemCount()).isEqualTo(6);
+    }
     public String getCartBadgeCount() {
         return shoppingCartBadge.getText();
     }

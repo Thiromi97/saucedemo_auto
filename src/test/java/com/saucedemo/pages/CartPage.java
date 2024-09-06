@@ -19,8 +19,8 @@ public class CartPage {
     @FindBy(className = "checkout_button")
     WebElement btnCheckout;
 
-    @FindBy(className = "cart_item")
-    List <WebElement> cartItems;
+//    @FindBy(className = "cart_item")
+//    List <WebElement> cartItems;
 
     @FindBy(className = "inventory_item_name")
     List <WebElement> cartItemNames;
@@ -53,9 +53,9 @@ public class CartPage {
         btnCheckout.click();
     }
 
-    public List<WebElement> getCartItemList() {
-        return cartItems;
-    }
+//    public List<WebElement> getCartItemList() {
+//        return cartItem;
+//    }
 
     public void removeProduct() {
         WebElement firstRemoveButton = removeButtons.getFirst();
@@ -80,7 +80,7 @@ public class CartPage {
     }
 
     public Integer getCartItemSize() {
-        return cartItems.size();
+        return cartItemNames.size();
     }
 
     public void verifyNavigationToCartPage() {

@@ -140,7 +140,7 @@ public class ProductTests extends TestBase {
 
     private static void verifyCartBadgeReflectTheAddedProductCount() {
         ProductsPage productsPage=new ProductsPage(webDriver);
-        productsPage.checkCartBadgeisUpdated();
+        productsPage.checkCartBadgeIsUpdated();
     }
 
     private static void verifyAllAddToCartButtonStateChangeToRemove() {

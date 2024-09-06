@@ -63,7 +63,7 @@ public class CartTest extends TestBase {
 
     private static void verifyCartItemsCountRemainedUnchanged() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.checkCartBadgeisUpdated();
+        productsPage.checkCartBadgeIsUpdated();
     }
 
     private static void verifyRedirectToProductPageSuccessfully() {
