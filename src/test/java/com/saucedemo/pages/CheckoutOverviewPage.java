@@ -7,8 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 public class CheckoutOverviewPage {
    final WebDriver webDriver;
 
@@ -48,10 +46,6 @@ public class CheckoutOverviewPage {
         btnFinish.click();
     }
 
-    public void verifyNavigationToOverviewPageSuccessfully() {
-        assertThat(txtOverviewTitle.getText()).isEqualTo("Checkout: Overview");
-    }
-
     public List<WebElement> getProductNames() {
         return productNames;
     }
@@ -68,30 +62,24 @@ public class CheckoutOverviewPage {
         return productNames.size();
     }
 
-    public void checkItemTotalIsSumOfProductPrices() {
-        double total = 0.00;
-        for(WebElement price:getProductPrices()){
-            String priceText = price.getText().replaceAll("[^0-9.]", "");
-            double numProductPrice = Double.parseDouble(priceText);
-            total = total +numProductPrice ;
-        }
-        String itemTotal = txtItemTotal.getText().replaceAll("[^0-9.]","");
-        double actualItemTotal = Double.parseDouble(itemTotal);
-        assertThat(actualItemTotal).isEqualTo(total);
-    }
-
-    public void checkTotalIsSumOfItemTotalAndTax() {
-        String itemTotal = txtItemTotal.getText().replaceAll("[^0-9.]","");
-        double numItemTotal = Double.parseDouble(itemTotal);
-        String itemTax = txtTax.getText().replaceAll("[^0-9.]","");
-        double numItemTax = Double.parseDouble(itemTax);
-        double expectedTotal = numItemTotal + numItemTax;
-        String total = txtTotal.getText().replaceAll("[^0-9.]","");
-        double actualTotal = Double.parseDouble(total);
-        assertThat(actualTotal).isEqualTo(expectedTotal);
-    }
 
     public void clickCancel() {
         btnCancel.click();
+    }
+
+    public WebElement getPageTitle() {
+        return txtOverviewTitle;
+    }
+
+    public WebElement getItemTotal() {
+        return txtItemTotal;
+    }
+
+    public WebElement getTax() {
+        return txtTax;
+    }
+
+    public WebElement getTotal() {
+        return txtTotal;
     }
 }

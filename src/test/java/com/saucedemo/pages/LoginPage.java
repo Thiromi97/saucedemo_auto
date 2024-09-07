@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LoginPage {
     final WebDriver webDriver;
@@ -66,11 +65,6 @@ public class LoginPage {
         return this;
     }
 
-    public void verifyUsernameAndPasswordDoNotMatchErrorMessage() {
-        assertThat(txtError.getText()).contains("Username and password do not match");
-    }
-
-
     public LoginPage clearUsername() {
         txtUsername.clear();
         return this;
@@ -81,23 +75,13 @@ public class LoginPage {
         return this;
     }
 
-    public void verifyUsernameIsRequiredErrorMessage() {
-        assertThat(txtError.getText()).contains("Username is required");
+
+    public WebElement getErrorMsg() {
+        return txtError;
     }
 
-
-    public void verifyPasswordIsRequiredErrorMessage() {
-        assertThat(txtError.getText()).contains("Password is required");
-    }
-
-    public void verifyUserIsLockedErrorMessage() {
-        assertThat(txtError.getText()).contains("Sorry, this user has been locked out");
-    }
-
-
-    public void verifySuccessLoginPageNavigation() {
-        String loginPageTitle = loginLogo.getText();
-        assertThat(loginPageTitle).isEqualTo("Swag Labs");
+    public WebElement getLoginTitle() {
+        return loginLogo;
     }
 }
 

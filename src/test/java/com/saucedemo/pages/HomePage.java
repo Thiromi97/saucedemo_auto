@@ -24,8 +24,8 @@ public class HomePage {
         PageFactory.initElements(webDriver,this);
     }
 
-    public void verifySuccessAboutPageNavigation() {
-        wait.until(ExpectedConditions.visibilityOf(txtAbout));
-        assertThat(txtAbout.getText()).contains("The world relies on your code");
+
+    public WebElement getAbout() {
+        return txtAbout;
     }
 }

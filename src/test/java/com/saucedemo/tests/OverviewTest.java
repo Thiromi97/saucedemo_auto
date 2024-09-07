@@ -4,6 +4,7 @@ import com.saucedemo.TestBase;
 import com.saucedemo.pages.CartPage;
 import com.saucedemo.pages.CheckoutCompletePage;
 import com.saucedemo.pages.CheckoutOverviewPage;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -66,17 +67,36 @@ public class OverviewTest extends TestBase {
 
     private static void verifyItemTotalIsSumOfAllProductPrices() {
         CheckoutOverviewPage overviewPage = new CheckoutOverviewPage(webDriver);
-        overviewPage.checkItemTotalIsSumOfProductPrices();
+        double total = 0.00;
+        for(WebElement price:overviewPage.getProductPrices()){
+            String priceText = price.getText().replaceAll("[^0-9.]", "");
+            double numProductPrice = Double.parseDouble(priceText);
+            total = total +numProductPrice ;
+        }
+        WebElement txtItemTotal = overviewPage.getItemTotal();
+        String itemTotal = txtItemTotal.getText().replaceAll("[^0-9.]","");
+        double actualItemTotal = Double.parseDouble(itemTotal);
+        assertThat(actualItemTotal).isEqualTo(total);
     }
 
     private static void verifyTotalIsSumOfItemTotalAndTax() {
         CheckoutOverviewPage overviewPage = new CheckoutOverviewPage(webDriver);
-        overviewPage.checkTotalIsSumOfItemTotalAndTax();
+        WebElement txtItemTotal = overviewPage.getItemTotal();
+        String itemTotal = txtItemTotal.getText().replaceAll("[^0-9.]","");
+        double numItemTotal = Double.parseDouble(itemTotal);
+        WebElement txtTax = overviewPage.getTax();
+        String itemTax = txtTax.getText().replaceAll("[^0-9.]","");
+        double numItemTax = Double.parseDouble(itemTax);
+        double expectedTotal = numItemTotal + numItemTax;
+        WebElement txtTotal = overviewPage.getTotal();
+        String total = txtTotal.getText().replaceAll("[^0-9.]","");
+        double actualTotal = Double.parseDouble(total);
+        assertThat(actualTotal).isEqualTo(expectedTotal);
     }
 
     private static void verifyThankYouPageLoadedSuccessfully() {
         CheckoutCompletePage completePage = new CheckoutCompletePage(webDriver);
-        completePage.verifyNavigationToThankYouPage();
+        assertThat(completePage.getPageTitle()).isEqualTo("Checkout: Complete!");
     }
 
 

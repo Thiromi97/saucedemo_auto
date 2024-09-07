@@ -10,75 +10,16 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.saucedemo.tests.LoginTests">
-                <methods>
-                    <include name="verifyLoginWithValidCredentials"/>
-                    <include name="verifyLoginWithInvalidUsername"/>
-                    <include name="verifyLoginWithInvalidPassword"/>
-                    <include name="verifyLoginWithInvalidCredentials"/>
-                    <include name="verifyLoginWithLockedUserCredentials"/>
-                    <include name="verifyLoginWithProblemUserCredentials"/>
-                    <include name="verifyLoginWithPerformanceGlitchUserCredentials"/>
-                    <include name="verifyLoginWithVisualUserCredentials"/>
-                    <include name="verifyLoginWithErrorUserCredentials"/>
-                    <include name="verifyLogoutFunctionality"/>
-                    <include name="verifyResetAppStateFunctionality"/>
-                    <include name="verifyAllItemFunctionality"/>
-                    <include name="verifyAboutFunctionality"/>
-                </methods>
             </class>
             <class name="com.saucedemo.tests.ProductTests">
-                <methods>
-                    <include name="verifyAddToCartFunctionalityForOneProduct"/>
-                    <include name="verifyAddToCartFunctionalityForMultipleProducts"/>
-                    <include name="verifyRemoveButtonFunctionalityForOneProduct"/>
-                    <include name="verifyRemoveButtonFunctionalityForMultipleProducts"/>
-                    <include name="verifySortProductsByNameAtoZ"/>
-                    <include name="verifySortProductsByNameZtoA"/>
-                    <include name="verifySortProductsByPriceLowToHigh"/>
-                    <include name="verifySortProductsByPriceHighToLow"/>
-                    <include name="verifyViewProductDetailsByProductTitle"/>
-                    <include name="verifyViewProductDetailsByProductImage"/>
-                    <include name="verifyShoppingCartButtonFunctionality"/>
-                </methods>
             </class>
             <class name="com.saucedemo.tests.CartTest">
-                <methods>
-                    <include name="verifyCartItemDetailsAreAccurate"/>
-                    <include name="verifyRemovingProductFromCart"/>
-                    <include name="verifyContinueShoppingButtonFunctionality"/>
-                    <include name="verifyCheckoutButtonFunctionality"/>
-                    <include name="verifyEmptyCartCannotProceedToCheckoutPage"/>
-                </methods>
             </class>
             <class name="com.saucedemo.tests.CheckoutTests">
-                <methods>
-                    <include name="verifyEmptyInputFieldsSubmission"/>
-                    <include name="verifyEmptyFirstNameFieldSubmission"/>
-                    <include name="verifyEmptyLastNameFieldSubmission"/>
-                    <include name="verifyEmptyPostalCodeFieldSubmission"/>
-                    <include name="verifyValidFieldSubmission"/>
-                    <include name="verifyFirstNameFieldAcceptValidInput"/>
-                    <include name="verifyFirstNameFieldNotAcceptInvalidInput"/>
-                    <include name="verifyLastNameFieldAcceptValidInput"/>
-                    <include name="verifyLastNameFieldNotAcceptInvalidInput"/>
-                    <include name="verifyPostalCodeFieldAcceptValidInput"/>
-                    <include name="verifyCancelButtonFunctionality"/>
-                </methods>
             </class>
             <class name="com.saucedemo.tests.OverviewTest">
-                <methods>
-                    <include name="verifyProductDetailsAreCorrect"/>
-                    <include name="verifyTheItemTotal"/>
-                    <include name="verifyTheTotal"/>
-                    <include name="verifyFinishButtonFunctionality"/>
-                    <include name="verifyCancelButtonFunctionality"/>
-                </methods>
             </class>
             <class name="com.saucedemo.tests.OrderCompleteTest">
-                <methods>
-                    <include name="verifyOrderConfirmationMsg"/>
-                    <include name="verifyBackToHomeButtonFunctionality"/>
-                </methods>
             </class>
         </classes>
     </test>

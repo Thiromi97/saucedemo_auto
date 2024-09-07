@@ -10,17 +10,12 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 public class CartPage {
     final WebDriver webDriver;
     WebDriverWait wait ;
 
     @FindBy(className = "checkout_button")
     WebElement btnCheckout;
-
-//    @FindBy(className = "cart_item")
-//    List <WebElement> cartItems;
 
     @FindBy(className = "inventory_item_name")
     List <WebElement> cartItemNames;
@@ -53,10 +48,6 @@ public class CartPage {
         btnCheckout.click();
     }
 
-//    public List<WebElement> getCartItemList() {
-//        return cartItem;
-//    }
-
     public void removeProduct() {
         WebElement firstRemoveButton = removeButtons.getFirst();
         firstRemoveButton.click();
@@ -66,25 +57,8 @@ public class CartPage {
         return shoppingCartBadge.getText();
     }
 
-    public void verifyCartItemsDeductByOne() {
-        verifyCartItemCount(5);
-    }
-
-    public void checkCartIsEmpty() {
-        verifyCartItemCount(0);
-    }
-
-    private void verifyCartItemCount(int expected) {
-        Integer cartItemCount = getCartItemSize();
-        assertThat(cartItemCount).isEqualTo(expected);
-    }
-
     public Integer getCartItemSize() {
         return cartItemNames.size();
-    }
-
-    public void verifyNavigationToCartPage() {
-        assertThat(txtPageTitle.getText()).isEqualTo("Your Cart");
     }
 
     public HashMap<String,String> getCartItemNames() {
@@ -109,13 +83,11 @@ public class CartPage {
         return cartNamesMap;
     }
 
-    public void verifyCartBadgeUpdated() {
-        String cartBadgeCount = getCartCount();
-        assertThat(cartBadgeCount).isEqualTo("5");
-    }
-
     public void clickContinueShoppingButton() {
         btnContinueShoppingBtn.click();
     }
 
+    public WebElement getPageTitle() {
+        return txtPageTitle;
+    }
 }

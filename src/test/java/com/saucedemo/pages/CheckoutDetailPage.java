@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
 public class CheckoutDetailPage {
 
    final WebDriver webDriver;
@@ -70,10 +68,6 @@ public class CheckoutDetailPage {
         btnContinue.click();
     }
 
-    public void verifyNavigateToCheckoutPageSuccessfully() {
-        assertThat(txtCheckoutTitle.getText()).isEqualTo("Checkout: Your Information");
-    }
-
     public CheckoutDetailPage clearFirstNameField() {
         txtFirstName.clear();
         return this;
@@ -89,54 +83,28 @@ public class CheckoutDetailPage {
         return this;
     }
 
-    public void checkErrorMsgFirstNameIsRequired() {
-        assertThat(txtErrorMsg.getText()).contains("First Name is required");
-    }
-
-    public void checkErrorMsgLastNameIsRequired() {
-        assertThat(txtErrorMsg.getText()).contains("Last Name is required");
-    }
-
-    public void checkErrorMsgPostalCodeIsRequired() {
-        assertThat(txtErrorMsg.getText()).contains("Postal Code is required");
-    }
-
-    public void verifyAlphabeticInputValidationOfFirstNameField() {
-        Faker faker = new Faker();
-        String firstName = faker.name().firstName();
-        txtFirstName.sendKeys(firstName);
-        assertThat(txtFirstName.getAttribute("value")).isEqualTo(firstName);
-    }
-
-    public void checkNumericAndSpecialCharactersCanInputToFirstNameField() {
-        enterInvalidInput(txtFirstName);
-    }
-
-    public void checkNumericAndSpecialCharacterCanInputToLastNameField() {
-        enterInvalidInput(txtLastName);
-    }
-
-    private void enterInvalidInput(WebElement txtFirstName) {
-        String input = "1234@#$";
-        txtFirstName.sendKeys(input);
-        assertThat(txtFirstName.getAttribute("value")).isNotEqualTo(input);
-    }
-
-    public void verifyAlphabeticInputValidationOfLastNameField() {
-        Faker faker = new Faker();
-        String lastName = faker.name().lastName();
-        txtLastName.sendKeys(lastName);
-        assertThat(txtLastName.getAttribute("value")).isEqualTo(lastName);
-    }
-
-    public void verifyInputValidationOfPostalCodeField() {
-        Faker faker = new Faker();
-        String postalCode = faker.address().zipCode();
-        txtPostalCode.sendKeys(postalCode);
-        assertThat(txtPostalCode.getAttribute("value")).isEqualTo(postalCode);
-    }
 
     public void clickCancel() {
         btnCancel.click();
+    }
+
+    public WebElement getPageTitle() {
+        return txtCheckoutTitle;
+    }
+
+    public WebElement getPostalCode() {
+        return txtPostalCode;
+    }
+
+    public WebElement getFirstName() {
+        return txtFirstName;
+    }
+
+    public WebElement getLastName() {
+        return txtLastName;
+    }
+
+    public WebElement getErrorMsg() {
+        return txtErrorMsg;
     }
 }

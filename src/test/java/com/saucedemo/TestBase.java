@@ -1,12 +1,20 @@
 package com.saucedemo;
 import com.saucedemo.pages.*;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
+import java.time.Duration;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestBase {
     public static WebDriver webDriver;
+    WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10)); ;
 
     @BeforeMethod
     @Parameters({"browser"})
@@ -47,17 +55,20 @@ public class TestBase {
 
     public void verifyProductIsRemovedFromTheCart() {
         CartPage cartPage = new CartPage(webDriver);
-        cartPage.verifyCartItemsDeductByOne();
+        Integer cartItemCount = cartPage.getCartItemSize();
+        AssertionsForClassTypes.assertThat(cartItemCount).isEqualTo(5);
     }
 
-    public void verifyCartPageLoadedSuccessfully() {
+    public static void verifyCartPageLoadedSuccessfully() {
         CartPage cartPage = new CartPage(webDriver);
-        cartPage.verifyNavigationToCartPage();
+        WebElement cartPageTitle = cartPage.getPageTitle();
+        assertThat(cartPageTitle.getText()).isEqualTo("Your Cart");
     }
 
     public void verifyProductPageLoadedSuccessfully() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        productsPage.verifySuccessNavigationToProductPage();
+        WebElement productTitle = wait.until(ExpectedConditions.visibilityOf(productsPage.getPageTitle()));
+        assertThat(productTitle.getText()).isEqualTo("Products");
     }
 
     public void fillAllCheckoutFieldsOfCheckoutDetailPage() {

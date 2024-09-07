@@ -9,23 +9,20 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class BrowserFactory {
 
     public static WebDriver getBrowser(String browser) {
-        WebDriver webDriver;
-        switch (browser.toLowerCase().trim()) {
-            case "chrome":
+        return switch (browser.toLowerCase().trim()) {
+            case "chrome" -> {
                 WebDriverManager.chromedriver().setup();
-                webDriver = new ChromeDriver();
-                break;
-            case "edge":
+                yield new ChromeDriver();
+            }
+            case "edge" -> {
                 WebDriverManager.edgedriver().setup();
-                webDriver = new EdgeDriver();
-                break;
-            case "firefox":
+                yield new EdgeDriver();
+            }
+            case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
-                webDriver = new FirefoxDriver();
-                break;
-            default:
-                throw new IllegalArgumentException("Supported browser name is not defined");
-        }
-        return webDriver;
+                yield new FirefoxDriver();
+            }
+            default -> throw new IllegalArgumentException("Supported browser name is not defined");
+        };
     }
 }
