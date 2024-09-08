@@ -199,7 +199,7 @@ public class LoginTests extends TestBase {
             String originalTitle = getElementText(productNames, i);
             ProductDetailPage productDetailPage =new ProductDetailPage(webDriver);
             String detailPageTitle = productDetailPage.getProductName();
-            Assertions.assertThat(detailPageTitle).isEqualTo(originalTitle);
+            assertThat(detailPageTitle).isEqualTo(originalTitle);
             webDriver.navigate().back();
         }
     }
@@ -210,7 +210,7 @@ public class LoginTests extends TestBase {
         String firstImageSrc = productImages.getFirst().getAttribute("src");
         for(WebElement productImage:productImages){
             String imageSrc = productImage.getAttribute("src");
-            Assertions.assertThat(imageSrc).isEqualTo(firstImageSrc);
+            assertThat(imageSrc).isEqualTo(firstImageSrc);
         }
     }
 
@@ -226,7 +226,7 @@ public class LoginTests extends TestBase {
             productImage.click();
             ProductDetailPage productDetailPage =new ProductDetailPage(webDriver);
             String productDetailImgSrc = productDetailPage.getProductImageSrc();
-            Assertions.assertThat(productImageSrc).isEqualTo(productDetailImgSrc);
+            assertThat(productImageSrc).isEqualTo(productDetailImgSrc);
             webDriver.navigate().back();
         }
     }
@@ -243,7 +243,7 @@ public class LoginTests extends TestBase {
         checkoutOverviewPage.clickFinish();
         CheckoutCompletePage completePage = new CheckoutCompletePage(webDriver);
         String completePageTitle = completePage.getPageTitle();
-        Assertions.assertThat(completePageTitle).isEqualTo("Checkout: Complete!");
+        assertThat(completePageTitle).isEqualTo("Checkout: Complete!");
     }
 
     private static void verifyRemoveButtonsFunctionProperly() {
@@ -270,7 +270,7 @@ public class LoginTests extends TestBase {
                 break;
             }
         }
-        Assertions.assertThat(buttonsFunctioning).isFalse();
+        assertThat(buttonsFunctioning).isFalse();
     }
     private static String getElementText(List<WebElement> buttonList, int i) {
         WebElement button = buttonList.get(i);
