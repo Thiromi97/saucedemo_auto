@@ -1,5 +1,7 @@
 package com.saucedemo.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +16,7 @@ import java.util.List;
 public class ProductsPage {
     final WebDriver webDriver;
     WebDriverWait wait ;
+    private static final Logger logger = LogManager.getLogger(ProductsPage.class);
 
     @FindBy(css="span.title")
     WebElement txtProductPageTitle;
@@ -71,19 +74,23 @@ public class ProductsPage {
 
     public ProductsPage clickMenu() {
         wait.until(ExpectedConditions.elementToBeClickable(btnMenu)).click();
+        logger.info("Click Menu");
         return this;
     }
 
     public void clickLogout() {
+        logger.info("Click Logout");
         wait.until(ExpectedConditions.elementToBeClickable(btnLogout)).click();
     }
 
     public void selectResetAppState() {
+        logger.info("Click ResetAppState");
         wait.until(ExpectedConditions.elementToBeClickable(btnResetAppState)).click();
     }
 
     public ProductsPage addProductToCart() {
         for (WebElement button:addToCartButtons){
+            logger.info("Click AddToCart");
             button.click();
         }
         return this;
@@ -92,47 +99,57 @@ public class ProductsPage {
     public Integer getCartItemCount() {
         clickCart();
         CartPage cartPage = new CartPage(webDriver);
+        logger.info("Get cart item count");
         return cartPage.getCartItemSize();
     }
 
     public void clickCart() {
+        logger.info("Click cart");
         btnCart.click();
     }
 
     public void clickAbout() {
+        logger.info("Click About");
         wait.until(ExpectedConditions.elementToBeClickable(btnAbout)).click();
     }
 
     public void clickAllItem() {
+        logger.info("Click All Item");
         wait.until(ExpectedConditions.elementToBeClickable(btnAllItems)).click();
     }
 
 
     public void addSpecificProductToCart() {
         WebElement firstProduct = addToCartButtons.getFirst();
+        logger.info("Add first product");
         firstProduct.click();
     }
 
     public String getCartBadgeCount() {
+        logger.info("Get cart badge count");
         return shoppingCartBadge.getText();
     }
 
     public void removeOneProduct() {
+        logger.info("Remove first product");
         removeButtons.getFirst().click();
     }
 
     public void removeProducts() {
         for (WebElement button:removeButtons){
+            logger.info("Remove product");
             button.click();
         }
     }
 
     public void clickNameAToZ() {
+        logger.info("Click Name(A to Z)");
         selectOption("Name (A to Z)");
     }
 
     private void selectOption(String text) {
         Select select = new Select(sortDropdown);
+        logger.info("Select option");
         select.selectByVisibleText(text);
     }
 
@@ -143,14 +160,17 @@ public class ProductsPage {
             String itemName = item.getText();
             sortedList.add(itemName);
         }
+        logger.info(sortedList);
         return sortedList;
     }
 
     public void clickNameZToA() {
+        logger.info("Click Name(Z to A)");
         selectOption("Name (Z to A)");
     }
 
     public void clickPriceLowToHigh() {
+        logger.info("Click Price (low to high)");
         selectOption("Price (low to high)");
     }
 
@@ -162,39 +182,48 @@ public class ProductsPage {
             Double numProductPrice = Double.valueOf(priceText);
             sortedList.add(numProductPrice);
         }
+        logger.info(sortedList);
         return sortedList;
     }
 
 
     public WebElement getPageTitle() {
+        logger.info("Get page title");
         return txtProductPageTitle;
     }
 
     public List<WebElement> getAddToCartButtonsList() {
+        logger.info("Get AddToCart Button list");
         return addToCartButtons;
     }
 
     public List<WebElement> getRemoveButtonsList() {
+        logger.info("Get remove button list");
         return removeButtons;
     }
 
     public List<WebElement> getProductNamesList() {
+        logger.info("Get product name list");
         return productNames;
     }
 
     public List<WebElement> getProductImagesList() {
+        logger.info("Get product images list ");
         return productImages;
     }
 
     public WebElement getShoppingCartButton() {
+        logger.info("Get shopping cart buttons list");
         return btnShoppingCart;
     }
 
     public List<WebElement> getProductDescriptionList() {
+        logger.info("Get production description list");
         return productsDescriptions;
     }
 
     public List<WebElement> getProductPricesList() {
+        logger.info("Get product prices list");
         return productPrices;
     }
 }

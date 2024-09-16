@@ -56,7 +56,7 @@ public class CartTest extends TestBase {
         addProductsToCart();
     }
 
-    private static void verifyEmptyCartNotAllowNavigationToCheckoutPage() {
+    private void verifyEmptyCartNotAllowNavigationToCheckoutPage() {
         CartPage cartPage = new CartPage(webDriver);
         cartPage.clickCheckOut();
         verifyCartPageLoadedSuccessfully();

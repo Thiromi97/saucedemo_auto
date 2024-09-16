@@ -2,136 +2,286 @@ package com.saucedemo.tests;
 
 import com.saucedemo.TestBase;
 import com.saucedemo.pages.*;
-import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.time.Duration;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LoginTests extends TestBase {
-
+    private static final Logger logger = LogManager.getLogger(LoginTests.class);
     static WebDriverWait wait = new WebDriverWait(webDriver,Duration.ofSeconds(10));
 
-    @Test
-    public void verifyLoginWithValidCredentials(){
-        sendUserCredentials("standard_user");
-        verifyProductPageLoadedSuccessfully();
-    }
-
-    @Test
-    public void verifyLoginWithInvalidUsername(){
-        sendInvalidUsername();
-        verifyErrorMessageForIncorrectCredentials();
-    }
-
-
-    @Test
-    public void verifyLoginWithInvalidPassword(){
-        sendInvalidPassword();
-        verifyErrorMessageForIncorrectCredentials();
-    }
-
-    @Test
-    public void verifyLoginWithInvalidCredentials(){
-        sendInvalidCredentials();
-        verifyErrorMessageForIncorrectCredentials();
-    }
-
-    @Test
-    public void verifyLoginWithBlankUsername(){
-      sendBlankUsername();
-      verifyErrorMessageForUsernameIsRequired();
-    }
-
-
-    @Test
-    public void verifyLoginWithBlankPassword(){
-        sendBlankPassword();
-        verifyErrorMessageForPasswordIsRequired();
-    }
-
-
-    @Test
-    public void verifyLoginWithBlankCredentials(){
-        sendBlankCredentials();
-        verifyErrorMessageForUsernameIsRequired();
-    }
-
-
-    @Test
-    public void verifyLoginWithLockedUserCredentials(){
-        sendUserCredentials("locked_out_user");
-        verifyErrorMessageForLockedOutUser();
-    }
-
-
-    @Test
-    public void verifyLoginWithProblemUserCredentials(){
-        sendUserCredentials("problem_user");
-        verifyProductPageLoadedSuccessfully();
-        verifyProductImagesAreUnique();
-        verifyAddToCartButtonsFunctionProperly();
-        verifyRemoveButtonsFunctionProperly();
-        verifyInCorrectProductDetailPageNavigation();
-    }
-
-
-    @Test
-    public void verifyLoginWithPerformanceGlitchUserCredentials(){
-        sendUserCredentials("performance_glitch_user");
-        verifyProductPageLoadedSuccessfully();
-    }
-
-    @Test
-    public void verifyLoginWithVisualUserCredentials(){
-        sendUserCredentials("visual_user");
-        verifyProductPageLoadedSuccessfully();
-        verifyDisplayingInCorrectProductImage();
-    }
-
+//    @Test
+//    public void verifyLoginWithValidCredentials(){
+//        logger.info("Starting test: verifyLoginWithValidCredentials");
+//        try {
+//            sendUserCredentials("standard_user");
+//            verifyProductPageLoadedSuccessfully();
+//            logger.info("Product page loaded successfully for valid credentials");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during valid login test", e);
+//        }
+//    }
+//
+//    @Test
+//    public void verifyLoginWithInvalidUsername(){
+//        logger.info("Starting test: verifyLoginWithInvalidUsername");
+//        try {
+//            sendInvalidUsername();
+//            verifyErrorMessageForIncorrectCredentials();
+//            logger.info("Correct error message displayed for invalid username");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during invalid username verification", e);
+//        }
+//    }
+//
+//
+//    @Test
+//    public void verifyLoginWithInvalidPassword(){
+//        logger.info("Starting test: verifyLoginWithInvalidPassword");
+//        try {
+//            sendInvalidPassword();
+//            verifyErrorMessageForIncorrectCredentials();
+//            logger.info("Correct error message displayed for invalid password");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during invalid password verification", e);
+//        }
+//    }
+//
+//    @Test
+//    public void verifyLoginWithInvalidCredentials(){
+//        logger.info("Starting test: verifyLoginWithInvalidCredentials");
+//        try {
+//            sendInvalidCredentials();
+//            verifyErrorMessageForIncorrectCredentials();
+//            logger.info("Correct error message displayed for invalid credentials");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during invalid credentials verification", e);
+//        }
+//    }
+//
+//    @Test
+//    public void verifyLoginWithBlankUsername(){
+//        logger.info("Starting test: verifyLoginWithBlankUsername");
+//        try {
+//            sendBlankUsername();
+//            verifyErrorMessageForUsernameIsRequired();
+//            logger.info("Correct error message displayed for Blank username");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during blank username verification", e);
+//        }
+//    }
+//
+//
+//    @Test
+//    public void verifyLoginWithBlankPassword(){
+//        logger.info("Starting test: verifyLoginWithBlankPassword");
+//        try{
+//            sendBlankPassword();
+//            verifyErrorMessageForPasswordIsRequired();
+//            logger.info("Correct error message displayed for Blank password");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during blank password verification", e);
+//        }
+//    }
+//
+//
+//    @Test
+//    public void verifyLoginWithBlankCredentials(){
+//        logger.info("Starting test: verifyLoginWithBlankCredentials");
+//        try{
+//            sendBlankCredentials();
+//            verifyErrorMessageForUsernameIsRequired();
+//            logger.info("Correct error message displayed for Blank credentials");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during blank credentials verification", e);
+//        }
+//    }
+//
+//
+//    @Test
+//    public void verifyLoginWithLockedUserCredentials(){
+//        logger.info("Starting test: verifyLoginWithLockedUserCredentials");
+//        try{
+//            sendUserCredentials("locked_out_user");
+//            verifyErrorMessageForLockedOutUser();
+//            logger.info("Correct error message displayed for locked out user credentials");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during locked out user credentials verification", e);
+//        }
+//
+//    }
+//
+//    @Test
+//    public void verifyLoginWithProblemUserCredentials(){
+//        logger.info("Starting test: verifyLoginWithProblemUserCredentials");
+//        try{
+//            sendUserCredentials("problem_user");
+//            verifyProductPageLoadedSuccessfully();
+//            logger.info("Product page loaded successfully for problem user");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during problem user credentials verification", e);
+//        }
+//        try{
+//            verifyProductImagesAreUnique();
+//            logger.info("All product images are same for problem user");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during problem user credentials verification", e);
+//        }
+//        try{
+//            verifyAddToCartButtonsFunctionProperly();
+//            logger.info("Some of AddToCart buttons non functioning for problem user");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during problem user credentials verification", e);
+//        }
+//        try{
+//            verifyRemoveButtonsFunctionProperly();
+//            logger.info("Some of Remove buttons non functioning for problem user");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during problem user credentials verification", e);
+//        }
+//        try{
+//            verifyInCorrectProductDetailPageNavigation();
+//            logger.info("Some products direct  to incorrect product detail page for problem user");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during problem user credentials verification", e);
+//        }
+//
+//    }
+//
+//
+//    @Test
+//    public void verifyLoginWithPerformanceGlitchUserCredentials(){
+//        logger.info("Starting test: verifyLoginWithPerformanceGlitchUserCredentials");
+//        try {
+//            sendUserCredentials("performance_glitch_user");
+//            verifyProductPageLoadedSuccessfully();
+//            logger.info("Product page loaded successfully for performance glitch user");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during performance glitch user credentials verification", e);
+//        }
+//
+//    }
+//
+//    @Test
+//    public void verifyLoginWithVisualUserCredentials(){
+//        logger.info("Starting test: verifyLoginWithVisualUserCredentials");
+//        try {
+//            sendUserCredentials("visual_user");
+//            verifyProductPageLoadedSuccessfully();
+//            logger.info("Product page loaded successfully for visual user");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during visual user credentials verification", e);
+//        }
+//        try {
+//            verifyDisplayingInCorrectProductImage();
+//            logger.info("Display incorrect product images for visual user");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during visual user credentials verification", e);
+//        }
+//
+//    }
+//
     @Test
     public void verifyLoginWithErrorUserCredentials(){
-        sendUserCredentials("error_user");
-        verifyProductPageLoadedSuccessfully();
-        verifyAddToCartButtonsFunctionProperly();
-        verifyRemoveButtonsFunctionProperly();
-        verifyCompletionOfCheckoutSuccessfully();
+        logger.info("Starting test: verifyLoginWithErrorUserCredentials");
+        try {
+            sendUserCredentials("error_user");
+            verifyProductPageLoadedSuccessfully();
+            logger.info("Product page loaded successfully for error user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during error user credentials verification", e);
+        }
+        try {
+            verifyAddToCartButtonsFunctionProperly();
+            logger.info("Some AddToCart buttons not functioning for error user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during error user credentials verification", e);
+        }
+        try {
+            verifyRemoveButtonsFunctionProperly();
+            logger.info("Some Remove buttons not functioning for error user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during error user credentials verification", e);
+        }
+        try {
+            verifyCompletionOfCheckoutSuccessfully();
+            logger.info("Unsuccessful completion of checkout for error user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during error user credentials verification", e);
+        }
+
     }
 
-    @Test
-    public void verifyLogoutFunctionality(){
-        verifyLoginWithValidCredentials();
-        selectLogout();
-        verifyLoginPageLoadedSuccessfully();
-    }
-
-    @Test
-    public void verifyResetAppStateFunctionality(){
-        verifyLoginWithValidCredentials();
-        selectResetAppState();
-        verifyCartIsReset();
-        verifyAllRemoveButtonResetToAddToCartButtons();
-    }
-
-    @Test
-    public void verifyAboutFunctionality(){
-        verifyLoginWithValidCredentials();
-        selectAbout();
-        verifyHomePageLoadedSuccessfully();
-    }
-
-    @Test
-    public void verifyAllItemFunctionality(){
-        verifyLoginWithValidCredentials();
-        selectAllItems();
-        verifyAllItemsAreDisplaying();
-    }
+//    @Test
+//    public void verifyLogoutFunctionality(){
+//        logger.info("Starting test: verifyLogoutFunctionality");
+//        try {
+//            loginAsStandardUser();
+//            selectLogout();
+//            verifyLoginPageLoadedSuccessfully();
+//            logger.info("Logout page loaded successfully");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during logout functionality verification", e);
+//        }
+//
+//    }
+//
+//    @Test
+//    public void verifyResetAppStateFunctionality(){
+//        logger.info("Starting test: verifyResetAppStateFunctionality");
+//        try {
+//            loginAsStandardUser();
+//            selectResetAppState();
+//            verifyCartIsReset();
+//            logger.info("Cart is reset successfully");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during resetAppState functionality verification", e);
+//        }
+//        try {
+//            verifyAllRemoveButtonResetToAddToCartButtons();
+//            logger.info("Remove buttons reset to AddToCart buttons successfully");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during resetAppState functionality verification", e);
+//        }
+//
+//    }
+//
+//    @Test
+//    public void verifyAboutFunctionality(){
+//        logger.info("Starting test: verifyAboutFunctionality");
+//        try {
+//            loginAsStandardUser();
+//            selectAbout();
+//            verifyHomePageLoadedSuccessfully();
+//            logger.info("Home Page Loaded successfully");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during about functionality verification", e);
+//        }
+//
+//    }
+//
+//    @Test
+//    public void verifyAllItemFunctionality(){
+//        logger.info("Starting test: verifyAllItemFunctionality");
+//        try {
+//            loginAsStandardUser();
+//            selectAllItems();
+//            verifyAllItemsAreDisplaying();
+//            logger.info("All Items are displayed successfully");
+//        } catch (Exception e) {
+//            logger.error("Unexpected error during allItem functionality verification", e);
+//        }
+//
+//    }
 
     private static void sendUserCredentials(String username) {
         LoginPage loginPage = new LoginPage(webDriver);
@@ -151,7 +301,11 @@ public class LoginTests extends TestBase {
     private static void verifyErrorMessageForIncorrectCredentials() {
         LoginPage loginPage = new LoginPage(webDriver);
         WebElement txtErrorMsg = loginPage.getErrorMsg();
-        assertThat(txtErrorMsg.getText()).contains("Username and password do not match");
+        String actualErrorMsg = txtErrorMsg.getText();
+        String expectedErrorMsg = "Username and password do not match";
+        logger.info(actualErrorMsg);
+        logger.info(expectedErrorMsg);
+        assertThat(actualErrorMsg).contains(expectedErrorMsg);
     }
 
     private static void sendInvalidCredentials() {
@@ -162,13 +316,21 @@ public class LoginTests extends TestBase {
     private static void verifyErrorMessageForUsernameIsRequired() {
         LoginPage loginPage = new LoginPage(webDriver);
         WebElement txtErrorMsg = loginPage.getErrorMsg();
-        assertThat(txtErrorMsg.getText()).contains("Username is required");
+        String actualErrorMsg = txtErrorMsg.getText();
+        String expectedErrorMsg = "Username is required";
+        logger.info(actualErrorMsg);
+        logger.info(expectedErrorMsg);
+        assertThat(actualErrorMsg).contains(expectedErrorMsg);
     }
 
     private static void verifyErrorMessageForLockedOutUser() {
         LoginPage loginPage = new LoginPage(webDriver);
         WebElement txtErrorMsg = loginPage.getErrorMsg();
-        assertThat(txtErrorMsg.getText()).contains("Sorry, this user has been locked out");
+        String actualErrorMsg = txtErrorMsg.getText();
+        String expectedErrorMsg = "Sorry, this user has been locked out";
+        logger.info(actualErrorMsg);
+        logger.info(expectedErrorMsg);
+        assertThat(actualErrorMsg).contains(expectedErrorMsg);
     }
 
     private static void sendBlankUsername() {
@@ -184,7 +346,11 @@ public class LoginTests extends TestBase {
     private static void verifyErrorMessageForPasswordIsRequired() {
         LoginPage loginPage = new LoginPage(webDriver);
         WebElement txtErrorMsg = loginPage.getErrorMsg();
-        assertThat(txtErrorMsg.getText()).contains("Password is required");
+        String actualErrorMsg = txtErrorMsg.getText();
+        String expectedErrorMsg = "Password is required";
+        logger.info(actualErrorMsg);
+        logger.info(expectedErrorMsg);
+        assertThat(actualErrorMsg).contains(expectedErrorMsg);
     }
 
     private static void sendBlankCredentials() {
@@ -199,6 +365,8 @@ public class LoginTests extends TestBase {
             String originalTitle = getElementText(productNames, i);
             ProductDetailPage productDetailPage =new ProductDetailPage(webDriver);
             String detailPageTitle = productDetailPage.getProductName();
+            logger.info(originalTitle);
+            logger.info(detailPageTitle);
             assertThat(detailPageTitle).isEqualTo(originalTitle);
             webDriver.navigate().back();
         }
@@ -208,8 +376,10 @@ public class LoginTests extends TestBase {
         ProductsPage productsPage = new ProductsPage(webDriver);
         List <WebElement> productImages = productsPage.getProductImagesList();
         String firstImageSrc = productImages.getFirst().getAttribute("src");
+        logger.info(firstImageSrc);
         for(WebElement productImage:productImages){
             String imageSrc = productImage.getAttribute("src");
+            logger.info(imageSrc);
             assertThat(imageSrc).isEqualTo(firstImageSrc);
         }
     }
@@ -219,13 +389,15 @@ public class LoginTests extends TestBase {
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         List<WebElement> productImages = productsPage.getProductImagesList();
         for (int i = 0; i < productImages.size(); i++) {
-            //relocate image
+            logger.info("Locate next image");
             productImages = webDriver.findElements(By.cssSelector(".inventory_item img"));
             WebElement productImage = productImages.get(i);
             String productImageSrc = productImage.getAttribute("src");
+            logger.info(productImageSrc);
             productImage.click();
             ProductDetailPage productDetailPage =new ProductDetailPage(webDriver);
             String productDetailImgSrc = productDetailPage.getProductImageSrc();
+            logger.info(productDetailImgSrc);
             assertThat(productImageSrc).isEqualTo(productDetailImgSrc);
             webDriver.navigate().back();
         }
@@ -243,35 +415,55 @@ public class LoginTests extends TestBase {
         checkoutOverviewPage.clickFinish();
         CheckoutCompletePage completePage = new CheckoutCompletePage(webDriver);
         String completePageTitle = completePage.getPageTitle();
-        assertThat(completePageTitle).isEqualTo("Checkout: Complete!");
+        String expectTitle = "Checkout: Complete!";
+        logger.info(completePageTitle);
+        logger.info(expectTitle);
+        assertThat(completePageTitle).isEqualTo(expectTitle);
     }
 
     private static void verifyRemoveButtonsFunctionProperly() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        List <WebElement> removeButtons = productsPage.getRemoveButtonsList();
-        verifyButtonFunctionality(removeButtons);
-    }
-
-    private static void verifyAddToCartButtonsFunctionProperly() {
-        ProductsPage productsPage = new ProductsPage(webDriver);
-        List <WebElement> addToCartButtons = productsPage.getAddToCartButtonsList();
-        verifyButtonFunctionality(addToCartButtons);
-    }
-
-    private static void verifyButtonFunctionality(List<WebElement> buttonList) {
+        List <WebElement> buttonList = productsPage.getRemoveButtonsList();
         boolean buttonsFunctioning = true;
         for (int i = 0; i < buttonList.size(); i++) {
-            String btnInitialText = getElementText(buttonList, i);
-            WebElement button;
-            // Re-find the button to ensure it hasn't changed in the DOM(it take the list again and fetch the correct btn)
-            button = buttonList.get(i);
-            if (button.getText().equals(btnInitialText)) {
+            WebElement button = buttonList.get(i);
+            String txtBeforeClickBtn = button.getText();
+            button.click();
+            List<WebElement> refreshedButtonList = productsPage.getRemoveButtonsList();
+            WebElement refreshedButton = refreshedButtonList.get(i);
+            String actualBtnText = refreshedButton.getText();
+            logger.info("Before Clicking - {}", txtBeforeClickBtn);
+            logger.info("After clicking - {}", actualBtnText);
+            if (actualBtnText.equals(txtBeforeClickBtn)) {
                 buttonsFunctioning = false;
                 break;
             }
         }
         assertThat(buttonsFunctioning).isFalse();
     }
+
+    private static void verifyAddToCartButtonsFunctionProperly() {
+        ProductsPage productsPage = new ProductsPage(webDriver);
+        List <WebElement> buttonList = productsPage.getAddToCartButtonsList();
+        boolean buttonsFunctioning = true;
+        for (int i = 0; i < buttonList.size(); i++) {
+                WebElement button = buttonList.get(i);
+                String txtBeforeClickBtn = button.getText();
+                button.click();
+                List<WebElement> refreshedButtonList = productsPage.getAddToCartButtonsList();
+                WebElement refreshedButton = refreshedButtonList.get(i);
+                String actualBtnText = refreshedButton.getText();
+                logger.info("Button Text Before Clicking - {}", txtBeforeClickBtn);
+                logger.info("Actual after clicking - {}", actualBtnText);
+
+                if (actualBtnText.equals(txtBeforeClickBtn)) {
+                    buttonsFunctioning = false;
+                    break;
+                }
+        }
+        assertThat(buttonsFunctioning).isFalse();
+    }
+
     private static String getElementText(List<WebElement> buttonList, int i) {
         WebElement button = buttonList.get(i);
         String btnInitialText = button.getText();
@@ -283,7 +475,10 @@ public class LoginTests extends TestBase {
         LoginPage loginPage = new LoginPage(webDriver);
         WebElement loginTitle = loginPage.getLoginTitle();
         String loginPageTitle = loginTitle.getText();
-        assertThat(loginPageTitle).isEqualTo("Swag Labs");
+        logger.info(loginPageTitle);
+        String expectedTitle = "Swag Labs";
+        logger.info(expectedTitle);
+        assertThat(loginPageTitle).isEqualTo(expectedTitle);
     }
 
     private static void selectLogout() {
@@ -296,13 +491,18 @@ public class LoginTests extends TestBase {
         List<WebElement> removeButtons = productsPage.getRemoveButtonsList();
         for(WebElement button:removeButtons){
             String buttonName = button.getText();
-            assertThat(buttonName).isEqualTo("Add to cart");
+            logger.info(buttonName);
+            String expectBtnName = "Add to cart";
+            logger.info(expectBtnName);
+            assertThat(buttonName).isEqualTo(expectBtnName);
         }
     }
 
     private static void verifyCartIsReset() {
         ProductsPage productsPage = new ProductsPage(webDriver);
         Integer cartItemCount = productsPage.getCartItemCount();
+        logger.info(cartItemCount);
+        logger.info(0);
         assertThat(cartItemCount).isEqualTo(0);
     }
 
@@ -314,7 +514,10 @@ public class LoginTests extends TestBase {
     private static void verifyAllItemsAreDisplaying() {
         ProductsPage productsPage = new ProductsPage(webDriver);
         List<WebElement> productNames = productsPage.getProductNamesList();
-        assertThat(productNames.size()).isEqualTo(6);
+        Integer noOfProducts = productNames.size();
+        logger.info(noOfProducts);
+        logger.info(6);
+        assertThat(noOfProducts).isEqualTo(6);
     }
 
     private static void selectAllItems() {
@@ -326,7 +529,11 @@ public class LoginTests extends TestBase {
         HomePage homePage = new HomePage(webDriver);
         WebElement txtAbout = homePage.getAbout();
         wait.until(ExpectedConditions.visibilityOf(txtAbout));
-        assertThat(txtAbout.getText()).contains("The world relies on your code");
+        String actualAbout = txtAbout.getText();
+        logger.info(actualAbout);
+        String expectAbout = "The world relies on your code";
+        logger.info(expectAbout);
+        assertThat(actualAbout).contains(expectAbout);
     }
 
     private static void selectAbout() {

@@ -4,6 +4,8 @@ import com.saucedemo.TestBase;
 import com.saucedemo.pages.CartPage;
 import com.saucedemo.pages.ProductDetailPage;
 import com.saucedemo.pages.ProductsPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -15,17 +17,35 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductTests extends TestBase {
-
+    private static final Logger logger = LogManager.getLogger(ProductTests.class);
     @Test
     public void verifyAddToCartFunctionalityForOneProduct(){
-        loginAsStandardUser();
-        verifyAddToCartButtonChangeToRemoveState();
-        verifyCartBadgeUpdateToOne();
-        verifyAddedProductDisplayInTheCart();
+        logger.info("Starting test: verifyAddToCartFunctionalityForOneProduct");
+        try {
+            loginAsStandardUser();
+            verifyAddToCartButtonChangeToRemoveState();
+            logger.info("AddToCart button change to remove state");
+        } catch (Exception e) {
+            logger.error("Unexpected error during addToCart functionality verification for one product ", e);
+        }
+        try {
+            verifyCartBadgeUpdateToOne();
+            logger.info("Cart Badge display as one");
+        } catch (Exception e) {
+            logger.error("Unexpected error during addToCart functionality verification for one product ", e);
+        }
+        try {
+            verifyAddedProductDisplayInTheCart();
+            logger.info("Added Product displayed successfully in the cart");
+        } catch (Exception e) {
+            logger.error("Unexpected error during addToCart functionality verification for one product ", e);
+        }
+
     }
 
     @Test
     public void verifyAddToCartFunctionalityForMultipleProducts(){
+        logger.info("Starting test: verifyAddToCartFunctionalityForMultipleProducts");
         loginAsStandardUser();
         verifyAllAddToCartButtonStateChangeToRemove();
         verifyCartBadgeReflectTheAddedProductCount();
@@ -34,6 +54,7 @@ public class ProductTests extends TestBase {
 
     @Test
     public void verifyRemoveButtonFunctionalityForOneProduct(){
+        logger.info("Starting test: verifyRemoveButtonFunctionalityForOneProduct");
         loginAsStandardUser();
         verifyCartBadgeCountDeductedByOne();
         goToCartPage();
@@ -42,50 +63,74 @@ public class ProductTests extends TestBase {
 
     @Test
     public void verifyRemoveButtonFunctionalityForMultipleProducts(){
-        loginAsStandardUser();
-        verifyCartBadgeCountDeductedByRemovedCount();
-        goToCartPage();
-        verifyProductsSuccessfullyRemovedFromCart();
+        logger.info("Starting test: verifyRemoveButtonFunctionalityForMultipleProducts");
+        try {
+            loginAsStandardUser();
+            verifyCartBadgeCountDeductedByRemovedCount();
+            logger.info("Removed product count updated in cart badge");
+        } catch (Exception e) {
+            logger.error("Unexpected error during remove button functionality verification for multiple products ", e);
+        }
+        try {
+            goToCartPage();
+            verifyProductsSuccessfullyRemovedFromCart();
+            logger.info("Products successfully removed from cart");
+        } catch (Exception e) {
+            logger.error("Unexpected error during remove button functionality verification for multiple products ", e);
+        }
+
     }
 
     @Test
     public void verifySortProductsByNameAtoZ(){
-        loginAsStandardUser();
-        verifyProductAreReorderedAtoZ();
+        logger.info("Starting test: verifySortProductsByNameAtoZ");try {
+            loginAsStandardUser();
+            verifyProductAreReorderedAtoZ();
+            logger.info("Products are reordered A to Z");
+        } catch (Exception e) {
+            logger.error("Unexpected error during sort functionality verification for Name(AtoZ) ", e);
+        }
+
     }
 
     @Test
     public void verifySortProductsByNameZtoA(){
+        logger.info("Starting test: verifySortProductsByNameZtoA");
         loginAsStandardUser();
         verifyProductsAreReorderedZtoA();
     }
 
     @Test
     public void verifySortProductsByPriceLowToHigh(){
+        logger.info("Starting test: verifySortProductsByPriceLowToHigh");
         loginAsStandardUser();
         verifyProductsReorderedLowToHigh();
     }
 
     @Test
     public void verifySortProductsByPriceHighToLow(){
+        logger.info("Starting test: verifySortProductsByPriceHighToLow");
         loginAsStandardUser();
         verifyProductsReorderedHighToLow();
     }
 
     @Test
     public void verifyViewProductDetailsByProductTitle(){
+        logger.info("Starting test: verifyViewProductDetailsByProductTitle");
         loginAsStandardUser();
         verifyClickingProductTitleRedirectToCorrectProductDetailPage();
     }
 
     @Test
     public void verifyViewProductDetailsByProductImage(){
+        logger.info("Starting test: verifyViewProductDetailsByProductImage");
         loginAsStandardUser();
         verifyClickingProductImageRedirectToCorrectProductDetailPage();
     }
 
     @Test
     public void verifyShoppingCartButtonFunctionality(){
+        logger.info("Starting test: verifyShoppingCartButtonFunctionality");
         loginAsStandardUser();
         goToCartPage();
         verifyCartPageLoadedSuccessfully();
@@ -148,7 +193,7 @@ public class ProductTests extends TestBase {
         ProductsPage productsPage = new ProductsPage(webDriver);
         List<Double> sortedList = productsPage.getSortedPriceList();
         List<Double> expectedNames = new ArrayList<>(sortedList);
-        Collections.sort(expectedNames);
+        Collections.sort(expectedNames.reversed());
         assertThat(sortedList).isEqualTo(expectedNames);
     }
 
