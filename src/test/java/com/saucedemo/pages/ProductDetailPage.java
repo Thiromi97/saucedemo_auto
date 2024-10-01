@@ -36,12 +36,12 @@ public class ProductDetailPage {
     public WebElement getProductTitle(){
         return txtProductTitle;
     }
-    public WebElement getProductDescription() {
-        return txtProductDescription;
+    public String getProductDescription() {
+        return txtProductDescription.getText();
     }
 
-    public WebElement getProductPrice() {
-        return txtProductPrice;
+    public String getProductPrice() {
+        return txtProductPrice.getText();
     }
 
     public WebElement getProductImage() {

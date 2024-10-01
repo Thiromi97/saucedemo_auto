@@ -9,20 +9,27 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestBase {
     public static WebDriver webDriver;
     public Logger logger;
-
+    public Properties properties;
     WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10)); ;
 
     @BeforeSuite
-    public void beforeSuite(){
+    public void beforeSuite() throws IOException {
         logger = LogManager.getLogger(TestBase.class);
+        FileReader file = new FileReader(".//src/main/resources/config.properties");
+        properties = new Properties();
+        properties.load(file);
     }
 
 
@@ -31,7 +38,7 @@ public class TestBase {
     public void beforeMethod(String browser, Method method) {
         webDriver = BrowserFactory.getBrowser(browser);
         System.out.println("browser =" + browser);
-        webDriver.get("https://saucedemo.com");
+        webDriver.get(properties.getProperty("baseUrl"));
         webDriver.manage().window().maximize();
     }
 

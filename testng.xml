@@ -9,11 +9,11 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="com.saucedemo.tests.LoginTests"/>
-<!--            <class name="com.saucedemo.tests.ProductTests"/>-->
-<!--            <class name="com.saucedemo.tests.CartTest"/>-->
-<!--            <class name="com.saucedemo.tests.CheckoutTests"/>-->
-<!--            <class name="com.saucedemo.tests.OverviewTest"/>-->
-<!--            <class name="com.saucedemo.tests.OrderCompleteTest"/>-->
+            <class name="com.saucedemo.tests.ProductTests"/>
+            <class name="com.saucedemo.tests.CartTest"/>
+            <class name="com.saucedemo.tests.CheckoutTests"/>
+            <class name="com.saucedemo.tests.OverviewTest"/>
+            <class name="com.saucedemo.tests.OrderCompleteTest"/>
         </classes>
     </test>
 <!--    <test name="chrome-headless-tests" enabled="true">-->

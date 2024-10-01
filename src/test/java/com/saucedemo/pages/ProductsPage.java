@@ -1,7 +1,9 @@
 package com.saucedemo.pages;
 
+import com.saucedemo.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -48,8 +50,11 @@ public class ProductsPage {
     @FindBy(className = "shopping_cart_badge")
     WebElement shoppingCartBadge;
     
-    @FindBy(css = ".inventory_item img")
+    @FindBy(css = "img.inventory_item_img")
     List <WebElement> productImages;
+
+    @FindBy(css = ".inventory_item_img")
+    WebElement productImage;
     
     @FindBy(css = ".btn_inventory")
     List <WebElement> addToCartButtons;
@@ -60,16 +65,49 @@ public class ProductsPage {
     @FindBy(css = ".inventory_item_name")
     List <WebElement> productNames;
 
+    @FindBy(css = ".inventory_item_name")
+    WebElement  productName;
+
     @FindBy(className = "inventory_item_price")
     List <WebElement> productPrices;
 
+    @FindBy(className = "inventory_item_price")
+    WebElement productPrice;
+
     @FindBy(css = ".inventory_item_desc")
     List <WebElement> productsDescriptions;
+
+    @FindBy(css = ".inventory_item_desc")
+    WebElement productDesc;
+
+    @FindBy(css = ".inventory_item")
+    List<WebElement> items;
 
     public ProductsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver,this);
         wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+    }
+
+    public List<Product> extractProducts() {
+        List<WebElement> productItems = items;
+        int productsSize = productItems.size();
+        List<Product> products = new ArrayList<>();
+
+        for (int i = 0; i < productsSize; i++) {
+            WebElement proName = productNames.get(i);
+            WebElement proDesc = productsDescriptions.get(i);
+            WebElement proPrice = productPrices.get(i);
+            WebElement proImg = productImages.get(i);
+            String name = proName.getText();
+            String description = proDesc.getText();
+            String price = proPrice.getText();
+            String image = proImg.getAttribute("src");
+            Product product = new Product(name, description, price,image);
+            products.add(product);
+        }
+
+        return products;
     }
 
     public ProductsPage clickMenu() {
@@ -225,5 +263,22 @@ public class ProductsPage {
     public List<WebElement> getProductPricesList() {
         logger.info("Get product prices list");
         return productPrices;
+    }
+
+    public List<String> getImageSrcList(){
+        List<String> imgSrc = new ArrayList<>();
+        for(WebElement img:productImages){
+            String imageSrc = img.getAttribute("src");
+            imgSrc.add(imageSrc);
+        }
+        return imgSrc;
+    }
+
+    public WebElement getProductName() {
+        return productName;
+    }
+
+    public WebElement getProductImage() {
+        return productImage;
     }
 }

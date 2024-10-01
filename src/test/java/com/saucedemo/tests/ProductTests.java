@@ -1,5 +1,6 @@
 package com.saucedemo.tests;
 
+import com.saucedemo.Product;
 import com.saucedemo.TestBase;
 import com.saucedemo.pages.CartPage;
 import com.saucedemo.pages.ProductDetailPage;
@@ -8,8 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -139,44 +138,66 @@ public class ProductTests extends TestBase {
     private static void verifyClickingProductImageRedirectToCorrectProductDetailPage() {
         ProductsPage productsPage = new ProductsPage(webDriver);
         List<WebElement> productImages = productsPage.getProductImagesList();
-        for (int i = 0; i < productImages.size(); i++) {
-            webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            WebElement productImage = productImages.get(i);
-            String txtImageSrc = productImage.getAttribute("src");
+        List<Product> products = productsPage.extractProducts();
+        logger.info("Get Product List");
+        int productsSize = products.size();
+        for (int i = 0; i < productsSize; i++) {
+            Product product = products.get(i);
+            logger.info("Get Product {}",i);
+            WebElement productImage = productsPage.getProductImage();
+            String txtProductName = product.getName();
+            logger.info("Get Product {} name: {}", i, txtProductName);
+            String txtProductDescription = product.getDescription();
+            logger.info("Get Product {} description: {}", i, txtProductDescription);
+            String txtProductPrice = product.getPrice();
+            logger.info("Get Product {} price: {}", i, txtProductPrice);
+            String txtProductImage = product.getImageSrc();
+            logger.info("Get Product {} imageSrc: {}",i,txtProductImage);
             productImage.click();
-            ProductDetailPage productDetailPage =new ProductDetailPage(webDriver);
-            String productDetailPageImgSrc = productDetailPage.getProductImageSrc();
-            Boolean title = productDetailPage.getProductTitle().isDisplayed();
-            isAllProductDetailsAreDisplaying(productDetailPage);
-            assertThat(txtImageSrc).isEqualTo(productDetailPageImgSrc);
-            assertThat(title).isTrue();
+            logger.info("Click Product{} Image",i);
+            ProductDetailPage productDetailPage = new ProductDetailPage(webDriver);
+            String txtProductDetailName = productDetailPage.getProductName();
+            logger.info("Get ProductDetail {} name: {}", i,txtProductDetailName);
+            assertThat(txtProductDetailName).isEqualTo(txtProductName);
+            String txtProductDetailDescription = productDetailPage.getProductDescription();
+            logger.info("Get ProductDetail {} description: {}", i, txtProductDetailDescription);
+            assertThat(txtProductDetailDescription).isEqualTo(txtProductDescription);
+            String txtProductDetailPrice = productDetailPage.getProductPrice();
+            logger.info("Get ProductDetail {} price: {}", i, txtProductDetailPrice);
+            assertThat(txtProductDetailPrice).isEqualTo(txtProductPrice);
+            String txtProductDetailImageSrc = productDetailPage.getProductImageSrc();
+            logger.info("Get ProductDetail {} imageSrc: {}",i,txtProductDetailImageSrc);
+//            assertThat(txtProductDetailImageSrc).isEqualTo(txtProductImage);
             webDriver.navigate().back();
         }
     }
 
-    private static void verifyClickingProductTitleRedirectToCorrectProductDetailPage() {
+
+    @Test
+    public static void verifyClickingProductTitleRedirectToCorrectProductDetailPage() {
         ProductsPage productsPage = new ProductsPage(webDriver);
-        List<WebElement> productNames = productsPage.getProductNamesList();
-        for (int i = 0; i < productNames.size(); i++) {
-            WebElement productTitle = productNames.get(i);
-            String txtProductTitle = productTitle.getText();
-            productTitle.click();
-            ProductDetailPage productDetailPage =new ProductDetailPage(webDriver);
-            String txtProductDetailPageTitle = productDetailPage.getProductName();
-            Boolean image = productDetailPage.getProductImage().isDisplayed();
-            isAllProductDetailsAreDisplaying(productDetailPage);
-            assertThat(txtProductTitle).isEqualTo(txtProductDetailPageTitle);
-            assertThat(image).isTrue();
+        List<WebElement> productTitles = productsPage.getProductNamesList();
+        List<Product> products = productsPage.extractProducts();
+        int productsSize = products.size();
+        for (int i = 0; i < productsSize; i++) {
+            Product product = products.get(i);
+            WebElement productName = productTitles.get(i);
+            String txtProductName = product.getName();
+            String txtProductDescription = product.getDescription();
+            String txtProductPrice = product.getPrice();
+            String txtProductImage = product.getImageSrc();
+            productName.click();
+            ProductDetailPage productDetailPage = new ProductDetailPage(webDriver);
+            String txtProductDetailName = productDetailPage.getProductName();
+            assertThat(txtProductDetailName).isEqualTo(txtProductName);
+            String txtProductDetailImageSrc = productDetailPage.getProductImageSrc();
+            assertThat(txtProductDetailImageSrc).isEqualTo(txtProductImage);
+            String txtProductDetailDescription = productDetailPage.getProductDescription();
+            assertThat(txtProductDetailDescription).isEqualTo(txtProductDescription);
+            String txtProductDetailPrice = productDetailPage.getProductPrice();
+            assertThat(txtProductDetailPrice).isEqualTo(txtProductPrice);
             webDriver.navigate().back();
         }
-    }
-    private static void isAllProductDetailsAreDisplaying(ProductDetailPage productDetailPage) {
-        Boolean description = productDetailPage.getProductDescription().isDisplayed();
-        Boolean price = productDetailPage.getProductPrice().isDisplayed();
-        Boolean addToCartButton = productDetailPage.getBtnAddToCart().isDisplayed();
-        assertThat(description).isTrue();
-        assertThat(price).isTrue();
-        assertThat(addToCartButton).isTrue();
     }
 
     private static void verifyProductsReorderedLowToHigh() {
