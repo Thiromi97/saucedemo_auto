@@ -4,7 +4,7 @@ This project demonstrates a comprehensive suite of automated tests for the Sauce
 
 ## Project Overview
 
-The automated testing solution covers a wide range of functionalities on the SauceDemo site, ensuring robust system testing and user workflow validation.
+The automated testing solution covers many functionalities on the SauceDemo site, ensuring robust system testing and user workflow validation.
 
 ### Key Features
 
@@ -16,6 +16,11 @@ The automated testing solution covers a wide range of functionalities on the Sau
 - **Common Test Base Class:** Manages common setup and teardown processes for consistency across tests.
 - **ReportNG:** Provides a detailed HTML report of test results.
 - **Cross-Browser Testing:** Supports testing across multiple browsers to ensure compatibility.
+- **POJO Classes:** Utilizes Plain Old Java Objects (POJOs) to encapsulate product data for easier management and manipulation within tests.
+  
+## Screenshot Functionality
+
+Incorporates functionality to take screenshots during test execution. 
 
 ## Test Cases
 
