@@ -3,7 +3,6 @@ package com.saucedemo.pages;
 import com.saucedemo.Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,7 +52,7 @@ public class ProductsPage {
     @FindBy(css = "img.inventory_item_img")
     List <WebElement> productImages;
 
-    @FindBy(css = ".inventory_item_img")
+    @FindBy(css = "img.inventory_item_img")
     WebElement productImage;
     
     @FindBy(css = ".btn_inventory")
@@ -65,20 +64,11 @@ public class ProductsPage {
     @FindBy(css = ".inventory_item_name")
     List <WebElement> productNames;
 
-    @FindBy(css = ".inventory_item_name")
-    WebElement  productName;
-
     @FindBy(className = "inventory_item_price")
     List <WebElement> productPrices;
 
-    @FindBy(className = "inventory_item_price")
-    WebElement productPrice;
-
     @FindBy(css = ".inventory_item_desc")
     List <WebElement> productsDescriptions;
-
-    @FindBy(css = ".inventory_item_desc")
-    WebElement productDesc;
 
     @FindBy(css = ".inventory_item")
     List<WebElement> items;
@@ -253,29 +243,6 @@ public class ProductsPage {
     public WebElement getShoppingCartButton() {
         logger.info("Get shopping cart buttons list");
         return btnShoppingCart;
-    }
-
-    public List<WebElement> getProductDescriptionList() {
-        logger.info("Get production description list");
-        return productsDescriptions;
-    }
-
-    public List<WebElement> getProductPricesList() {
-        logger.info("Get product prices list");
-        return productPrices;
-    }
-
-    public List<String> getImageSrcList(){
-        List<String> imgSrc = new ArrayList<>();
-        for(WebElement img:productImages){
-            String imageSrc = img.getAttribute("src");
-            imgSrc.add(imageSrc);
-        }
-        return imgSrc;
-    }
-
-    public WebElement getProductName() {
-        return productName;
     }
 
     public WebElement getProductImage() {

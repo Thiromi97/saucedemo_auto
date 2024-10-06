@@ -3,7 +3,6 @@ package com.saucedemo.tests;
 import com.saucedemo.TestBase;
 import com.saucedemo.pages.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,177 +18,177 @@ public class LoginTests extends TestBase {
     private static final Logger logger = LogManager.getLogger(LoginTests.class);
     static WebDriverWait wait = new WebDriverWait(webDriver,Duration.ofSeconds(10));
 
-//    @Test
-//    public void verifyLoginWithValidCredentials(){
-//        logger.info("Starting test: verifyLoginWithValidCredentials");
-//        try {
-//            sendUserCredentials("standard_user");
-//            verifyProductPageLoadedSuccessfully();
-//            logger.info("Product page loaded successfully for valid credentials");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during valid login test", e);
-//        }
-//    }
-//
-//    @Test
-//    public void verifyLoginWithInvalidUsername(){
-//        logger.info("Starting test: verifyLoginWithInvalidUsername");
-//        try {
-//            sendInvalidUsername();
-//            verifyErrorMessageForIncorrectCredentials();
-//            logger.info("Correct error message displayed for invalid username");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during invalid username verification", e);
-//        }
-//    }
-//
-//
-//    @Test
-//    public void verifyLoginWithInvalidPassword(){
-//        logger.info("Starting test: verifyLoginWithInvalidPassword");
-//        try {
-//            sendInvalidPassword();
-//            verifyErrorMessageForIncorrectCredentials();
-//            logger.info("Correct error message displayed for invalid password");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during invalid password verification", e);
-//        }
-//    }
-//
-//    @Test
-//    public void verifyLoginWithInvalidCredentials(){
-//        logger.info("Starting test: verifyLoginWithInvalidCredentials");
-//        try {
-//            sendInvalidCredentials();
-//            verifyErrorMessageForIncorrectCredentials();
-//            logger.info("Correct error message displayed for invalid credentials");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during invalid credentials verification", e);
-//        }
-//    }
-//
-//    @Test
-//    public void verifyLoginWithBlankUsername(){
-//        logger.info("Starting test: verifyLoginWithBlankUsername");
-//        try {
-//            sendBlankUsername();
-//            verifyErrorMessageForUsernameIsRequired();
-//            logger.info("Correct error message displayed for Blank username");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during blank username verification", e);
-//        }
-//    }
-//
-//
-//    @Test
-//    public void verifyLoginWithBlankPassword(){
-//        logger.info("Starting test: verifyLoginWithBlankPassword");
-//        try{
-//            sendBlankPassword();
-//            verifyErrorMessageForPasswordIsRequired();
-//            logger.info("Correct error message displayed for Blank password");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during blank password verification", e);
-//        }
-//    }
-//
-//
-//    @Test
-//    public void verifyLoginWithBlankCredentials(){
-//        logger.info("Starting test: verifyLoginWithBlankCredentials");
-//        try{
-//            sendBlankCredentials();
-//            verifyErrorMessageForUsernameIsRequired();
-//            logger.info("Correct error message displayed for Blank credentials");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during blank credentials verification", e);
-//        }
-//    }
-//
-//
-//    @Test
-//    public void verifyLoginWithLockedUserCredentials(){
-//        logger.info("Starting test: verifyLoginWithLockedUserCredentials");
-//        try{
-//            sendUserCredentials("locked_out_user");
-//            verifyErrorMessageForLockedOutUser();
-//            logger.info("Correct error message displayed for locked out user credentials");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during locked out user credentials verification", e);
-//        }
-//
-//    }
-//
-//    @Test
-//    public void verifyLoginWithProblemUserCredentials(){
-//        logger.info("Starting test: verifyLoginWithProblemUserCredentials");
-//        try{
-//            sendUserCredentials("problem_user");
-//            verifyProductPageLoadedSuccessfully();
-//            logger.info("Product page loaded successfully for problem user");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during problem user credentials verification", e);
-//        }
-//        try{
-//            verifyProductImagesAreUnique();
-//            logger.info("All product images are same for problem user");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during problem user credentials verification", e);
-//        }
-//        try{
-//            verifyAddToCartButtonsFunctionProperly();
-//            logger.info("Some of AddToCart buttons non functioning for problem user");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during problem user credentials verification", e);
-//        }
-//        try{
-//            verifyRemoveButtonsFunctionProperly();
-//            logger.info("Some of Remove buttons non functioning for problem user");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during problem user credentials verification", e);
-//        }
-//        try{
-//            verifyInCorrectProductDetailPageNavigation();
-//            logger.info("Some products direct  to incorrect product detail page for problem user");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during problem user credentials verification", e);
-//        }
-//
-//    }
-//
-//
-//    @Test
-//    public void verifyLoginWithPerformanceGlitchUserCredentials(){
-//        logger.info("Starting test: verifyLoginWithPerformanceGlitchUserCredentials");
-//        try {
-//            sendUserCredentials("performance_glitch_user");
-//            verifyProductPageLoadedSuccessfully();
-//            logger.info("Product page loaded successfully for performance glitch user");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during performance glitch user credentials verification", e);
-//        }
-//
-//    }
-//
-//    @Test
-//    public void verifyLoginWithVisualUserCredentials(){
-//        logger.info("Starting test: verifyLoginWithVisualUserCredentials");
-//        try {
-//            sendUserCredentials("visual_user");
-//            verifyProductPageLoadedSuccessfully();
-//            logger.info("Product page loaded successfully for visual user");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during visual user credentials verification", e);
-//        }
-//        try {
-//            verifyDisplayingInCorrectProductImage();
-//            logger.info("Display incorrect product images for visual user");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during visual user credentials verification", e);
-//        }
-//
-//    }
-//
+    @Test
+    public void verifyLoginWithValidCredentials(){
+        logger.info("Starting test: verifyLoginWithValidCredentials");
+        try {
+            sendUserCredentials(properties.getProperty("stdUsername"));
+            verifyProductPageLoadedSuccessfully();
+            logger.info("Product page loaded successfully for valid credentials");
+        } catch (Exception e) {
+            logger.error("Unexpected error during valid login test", e);
+        }
+    }
+
+    @Test
+    public void verifyLoginWithInvalidUsername(){
+        logger.info("Starting test: verifyLoginWithInvalidUsername");
+        try {
+            sendInvalidUsername();
+            verifyErrorMessageForIncorrectCredentials();
+            logger.info("Correct error message displayed for invalid username");
+        } catch (Exception e) {
+            logger.error("Unexpected error during invalid username verification", e);
+        }
+    }
+
+
+    @Test
+    public void verifyLoginWithInvalidPassword(){
+        logger.info("Starting test: verifyLoginWithInvalidPassword");
+        try {
+            sendInvalidPassword();
+            verifyErrorMessageForIncorrectCredentials();
+            logger.info("Correct error message displayed for invalid password");
+        } catch (Exception e) {
+            logger.error("Unexpected error during invalid password verification", e);
+        }
+    }
+
+    @Test
+    public void verifyLoginWithInvalidCredentials(){
+        logger.info("Starting test: verifyLoginWithInvalidCredentials");
+        try {
+            sendInvalidCredentials();
+            verifyErrorMessageForIncorrectCredentials();
+            logger.info("Correct error message displayed for invalid credentials");
+        } catch (Exception e) {
+            logger.error("Unexpected error during invalid credentials verification", e);
+        }
+    }
+
+    @Test
+    public void verifyLoginWithBlankUsername(){
+        logger.info("Starting test: verifyLoginWithBlankUsername");
+        try {
+            sendBlankUsername();
+            verifyErrorMessageForUsernameIsRequired();
+            logger.info("Correct error message displayed for Blank username");
+        } catch (Exception e) {
+            logger.error("Unexpected error during blank username verification", e);
+        }
+    }
+
+
+    @Test
+    public void verifyLoginWithBlankPassword(){
+        logger.info("Starting test: verifyLoginWithBlankPassword");
+        try{
+            sendBlankPassword();
+            verifyErrorMessageForPasswordIsRequired();
+            logger.info("Correct error message displayed for Blank password");
+        } catch (Exception e) {
+            logger.error("Unexpected error during blank password verification", e);
+        }
+    }
+
+
+    @Test
+    public void verifyLoginWithBlankCredentials(){
+        logger.info("Starting test: verifyLoginWithBlankCredentials");
+        try{
+            sendBlankCredentials();
+            verifyErrorMessageForUsernameIsRequired();
+            logger.info("Correct error message displayed for Blank credentials");
+        } catch (Exception e) {
+            logger.error("Unexpected error during blank credentials verification", e);
+        }
+    }
+
+
+    @Test
+    public void verifyLoginWithLockedUserCredentials(){
+        logger.info("Starting test: verifyLoginWithLockedUserCredentials");
+        try{
+            sendUserCredentials("locked_out_user");
+            verifyErrorMessageForLockedOutUser();
+            logger.info("Correct error message displayed for locked out user credentials");
+        } catch (Exception e) {
+            logger.error("Unexpected error during locked out user credentials verification", e);
+        }
+
+    }
+
+    @Test
+    public void verifyLoginWithProblemUserCredentials(){
+        logger.info("Starting test: verifyLoginWithProblemUserCredentials");
+        try{
+            sendUserCredentials("problem_user");
+            verifyProductPageLoadedSuccessfully();
+            logger.info("Product page loaded successfully for problem user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during problem user credentials verification", e);
+        }
+        try{
+            verifyProductImagesAreUnique();
+            logger.info("All product images are same for problem user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during problem user credentials verification", e);
+        }
+        try{
+            verifyAddToCartButtonsFunctionProperly();
+            logger.info("Some of AddToCart buttons non functioning for problem user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during problem user credentials verification", e);
+        }
+        try{
+            verifyRemoveButtonsFunctionProperly();
+            logger.info("Some of Remove buttons non functioning for problem user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during problem user credentials verification", e);
+        }
+        try{
+            verifyInCorrectProductDetailPageNavigation();
+            logger.info("Some products direct  to incorrect product detail page for problem user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during problem user credentials verification", e);
+        }
+
+    }
+
+
+    @Test
+    public void verifyLoginWithPerformanceGlitchUserCredentials(){
+        logger.info("Starting test: verifyLoginWithPerformanceGlitchUserCredentials");
+        try {
+            sendUserCredentials(properties.getProperty("performanceGlitchUsername"));
+            verifyProductPageLoadedSuccessfully();
+            logger.info("Product page loaded successfully for performance glitch user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during performance glitch user credentials verification", e);
+        }
+
+    }
+
+    @Test
+    public void verifyLoginWithVisualUserCredentials(){
+        logger.info("Starting test: verifyLoginWithVisualUserCredentials");
+        try {
+            sendUserCredentials("visual_user");
+            verifyProductPageLoadedSuccessfully();
+            logger.info("Product page loaded successfully for visual user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during visual user credentials verification", e);
+        }
+        try {
+            verifyDisplayingInCorrectProductImage();
+            logger.info("Display incorrect product images for visual user");
+        } catch (Exception e) {
+            logger.error("Unexpected error during visual user credentials verification", e);
+        }
+
+    }
+
     @Test
     public void verifyLoginWithErrorUserCredentials(){
         logger.info("Starting test: verifyLoginWithErrorUserCredentials");
@@ -221,67 +220,67 @@ public class LoginTests extends TestBase {
 
     }
 
-//    @Test
-//    public void verifyLogoutFunctionality(){
-//        logger.info("Starting test: verifyLogoutFunctionality");
-//        try {
-//            loginAsStandardUser();
-//            selectLogout();
-//            verifyLoginPageLoadedSuccessfully();
-//            logger.info("Logout page loaded successfully");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during logout functionality verification", e);
-//        }
-//
-//    }
-//
-//    @Test
-//    public void verifyResetAppStateFunctionality(){
-//        logger.info("Starting test: verifyResetAppStateFunctionality");
-//        try {
-//            loginAsStandardUser();
-//            selectResetAppState();
-//            verifyCartIsReset();
-//            logger.info("Cart is reset successfully");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during resetAppState functionality verification", e);
-//        }
-//        try {
-//            verifyAllRemoveButtonResetToAddToCartButtons();
-//            logger.info("Remove buttons reset to AddToCart buttons successfully");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during resetAppState functionality verification", e);
-//        }
-//
-//    }
-//
-//    @Test
-//    public void verifyAboutFunctionality(){
-//        logger.info("Starting test: verifyAboutFunctionality");
-//        try {
-//            loginAsStandardUser();
-//            selectAbout();
-//            verifyHomePageLoadedSuccessfully();
-//            logger.info("Home Page Loaded successfully");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during about functionality verification", e);
-//        }
-//
-//    }
-//
-//    @Test
-//    public void verifyAllItemFunctionality(){
-//        logger.info("Starting test: verifyAllItemFunctionality");
-//        try {
-//            loginAsStandardUser();
-//            selectAllItems();
-//            verifyAllItemsAreDisplaying();
-//            logger.info("All Items are displayed successfully");
-//        } catch (Exception e) {
-//            logger.error("Unexpected error during allItem functionality verification", e);
-//        }
-//
-//    }
+    @Test
+    public void verifyLogoutFunctionality(){
+        logger.info("Starting test: verifyLogoutFunctionality");
+        try {
+            loginAsStandardUser();
+            selectLogout();
+            verifyLoginPageLoadedSuccessfully();
+            logger.info("Logout page loaded successfully");
+        } catch (Exception e) {
+            logger.error("Unexpected error during logout functionality verification", e);
+        }
+
+    }
+
+    @Test
+    public void verifyResetAppStateFunctionality(){
+        logger.info("Starting test: verifyResetAppStateFunctionality");
+        try {
+            loginAsStandardUser();
+            selectResetAppState();
+            verifyCartIsReset();
+            logger.info("Cart is reset successfully");
+        } catch (Exception e) {
+            logger.error("Unexpected error during resetAppState functionality verification", e);
+        }
+        try {
+            verifyAllRemoveButtonResetToAddToCartButtons();
+            logger.info("Remove buttons reset to AddToCart buttons successfully");
+        } catch (Exception e) {
+            logger.error("Unexpected error during resetAppState functionality verification", e);
+        }
+
+    }
+
+    @Test
+    public void verifyAboutFunctionality(){
+        logger.info("Starting test: verifyAboutFunctionality");
+        try {
+            loginAsStandardUser();
+            selectAbout();
+            verifyHomePageLoadedSuccessfully();
+            logger.info("Home Page Loaded successfully");
+        } catch (Exception e) {
+            logger.error("Unexpected error during about functionality verification", e);
+        }
+
+    }
+
+    @Test
+    public void verifyAllItemFunctionality(){
+        logger.info("Starting test: verifyAllItemFunctionality");
+        try {
+            loginAsStandardUser();
+            selectAllItems();
+            verifyAllItemsAreDisplaying();
+            logger.info("All Items are displayed successfully");
+        } catch (Exception e) {
+            logger.error("Unexpected error during allItem functionality verification", e);
+        }
+
+    }
 
     private static void sendUserCredentials(String username) {
         LoginPage loginPage = new LoginPage(webDriver);
@@ -476,7 +475,7 @@ public class LoginTests extends TestBase {
         WebElement loginTitle = loginPage.getLoginTitle();
         String loginPageTitle = loginTitle.getText();
         logger.info(loginPageTitle);
-        String expectedTitle = "Swag Labs";
+        String expectedTitle = properties.getProperty("loginPageTitle");
         logger.info(expectedTitle);
         assertThat(loginPageTitle).isEqualTo(expectedTitle);
     }
@@ -492,7 +491,7 @@ public class LoginTests extends TestBase {
         for(WebElement button:removeButtons){
             String buttonName = button.getText();
             logger.info(buttonName);
-            String expectBtnName = "Add to cart";
+            String expectBtnName = properties.getProperty("addToCartBtnName");
             logger.info(expectBtnName);
             assertThat(buttonName).isEqualTo(expectBtnName);
         }

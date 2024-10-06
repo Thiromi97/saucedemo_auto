@@ -21,8 +21,6 @@ public class ProductDetailPage {
    @FindBy(className = "inventory_details_price")
    WebElement txtProductPrice;
 
-   @FindBy(id = "add-to-cart")
-   WebElement btnAddToCart;
 
     public ProductDetailPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -33,23 +31,12 @@ public class ProductDetailPage {
         return txtProductTitle.getText();
     }
 
-    public WebElement getProductTitle(){
-        return txtProductTitle;
-    }
     public String getProductDescription() {
         return txtProductDescription.getText();
     }
 
     public String getProductPrice() {
         return txtProductPrice.getText();
-    }
-
-    public WebElement getProductImage() {
-        return imgProduct;
-    }
-
-    public WebElement getBtnAddToCart() {
-        return btnAddToCart;
     }
 
     public String getProductImageSrc(){

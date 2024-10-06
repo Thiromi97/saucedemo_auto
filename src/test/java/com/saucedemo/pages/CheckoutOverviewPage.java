@@ -1,10 +1,12 @@
 package com.saucedemo.pages;
 
+import com.saucedemo.OverviewProduct;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CheckoutOverviewPage {
@@ -37,29 +39,39 @@ public class CheckoutOverviewPage {
     @FindBy(css = ".summary_total_label")
     WebElement txtTotal;
 
+    @FindBy(className = "cart_item_label")
+    List<WebElement> items;
+
     public CheckoutOverviewPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver,this);
+    }
+
+    public List<OverviewProduct> extractProducts() {
+        List<WebElement> overviewItems = items;
+        int productsSize = overviewItems.size();
+        List<OverviewProduct> products = new ArrayList<>();
+
+        for (int i = 0; i < productsSize; i++) {
+            WebElement proName = productNames.get(i);
+            WebElement proDesc = productDescriptions.get(i);
+            WebElement proPrice = productPrices.get(i);
+            String name = proName.getText();
+            String description = proDesc.getText();
+            String price = proPrice.getText();
+            OverviewProduct product = new OverviewProduct(name, description, price);
+            products.add(product);
+        }
+
+        return products;
     }
 
     public void clickFinish() {
         btnFinish.click();
     }
 
-    public List<WebElement> getProductNames() {
-        return productNames;
-    }
-
-    public List<WebElement> getProductDescriptions() {
-        return productDescriptions;
-    }
-
     public List<WebElement> getProductPrices() {
         return productPrices;
-    }
-
-    public int getNoOfItems() {
-        return productNames.size();
     }
 
 

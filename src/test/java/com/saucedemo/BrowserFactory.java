@@ -16,7 +16,7 @@ public class BrowserFactory {
         switch (browser) {
             case "chrome":
             case "chrome headless":
-                WebDriverManager.chromedriver().setup();
+//                WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 if (browser.contains("headless")) {
                     chromeOptions.addArguments("--headless=new");

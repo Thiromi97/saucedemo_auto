@@ -159,6 +159,10 @@ public class ProductTests extends TestBase {
             String txtProductDetailName = productDetailPage.getProductName();
             logger.info("Get ProductDetail {} name: {}", i,txtProductDetailName);
             assertThat(txtProductDetailName).isEqualTo(txtProductName);
+            boolean nameResult = false;
+            if(!nameResult){
+                takeScreenShotFullPage("verifyClickingProductImageRedirectToCorrectProductDetailPage");
+            }
             String txtProductDetailDescription = productDetailPage.getProductDescription();
             logger.info("Get ProductDetail {} description: {}", i, txtProductDetailDescription);
             assertThat(txtProductDetailDescription).isEqualTo(txtProductDescription);
@@ -167,7 +171,7 @@ public class ProductTests extends TestBase {
             assertThat(txtProductDetailPrice).isEqualTo(txtProductPrice);
             String txtProductDetailImageSrc = productDetailPage.getProductImageSrc();
             logger.info("Get ProductDetail {} imageSrc: {}",i,txtProductDetailImageSrc);
-//            assertThat(txtProductDetailImageSrc).isEqualTo(txtProductImage);
+            assertThat(txtProductDetailImageSrc).isEqualTo(txtProductImage);
             webDriver.navigate().back();
         }
     }
