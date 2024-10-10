@@ -1,6 +1,5 @@
 package com.saucedemo;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -25,7 +24,7 @@ public class BrowserFactory {
 
             case "edge":
             case "edge headless":
-                WebDriverManager.edgedriver().setup();
+//                WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
                 if (browser.contains("headless")) {
                     edgeOptions.addArguments("--headless=new");
@@ -34,7 +33,7 @@ public class BrowserFactory {
 
             case "firefox":
             case "firefox headless":
-                WebDriverManager.firefoxdriver().setup();
+//                WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 if (browser.contains("headless")) {
                     firefoxOptions.addArguments("--headless");

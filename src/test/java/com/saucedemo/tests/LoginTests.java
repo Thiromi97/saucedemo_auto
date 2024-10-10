@@ -326,7 +326,7 @@ public class LoginTests extends TestBase {
         LoginPage loginPage = new LoginPage(webDriver);
         WebElement txtErrorMsg = loginPage.getErrorMsg();
         String actualErrorMsg = txtErrorMsg.getText();
-        String expectedErrorMsg = "Sorry, this user has been locked out";
+        String expectedErrorMsg = properties.getProperty("errorMsgLockedOutUser");
         logger.info(actualErrorMsg);
         logger.info(expectedErrorMsg);
         assertThat(actualErrorMsg).contains(expectedErrorMsg);
