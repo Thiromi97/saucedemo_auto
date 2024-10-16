@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class CheckoutTests extends TestBase {
+public class CheckoutTest extends TestBase {
 
     @Test
     public void verifyEmptyInputFieldsSubmission(){

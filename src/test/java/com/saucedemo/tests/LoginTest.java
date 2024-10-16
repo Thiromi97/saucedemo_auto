@@ -14,8 +14,8 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LoginTests extends TestBase {
-    private static final Logger logger = LogManager.getLogger(LoginTests.class);
+public class LoginTest extends TestBase {
+    private static final Logger logger = LogManager.getLogger(LoginTest.class);
     static WebDriverWait wait = new WebDriverWait(webDriver,Duration.ofSeconds(10));
 
     @Test

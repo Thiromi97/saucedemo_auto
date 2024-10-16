@@ -8,10 +8,10 @@
     <test name="chrome-tests" enabled="true">
         <parameter name="browser" value="chrome"/>
         <classes>
-<!--            <class name="com.saucedemo.tests.LoginTests"/>-->
-<!--            <class name="com.saucedemo.tests.ProductTests"/>-->
+<!--            <class name="com.saucedemo.tests.LoginTest"/>-->
+<!--            <class name="com.saucedemo.tests.ProductTest"/>-->
 <!--            <class name="com.saucedemo.tests.CartTest"/>-->
-<!--            <class name="com.saucedemo.tests.CheckoutTests"/>-->
+<!--            <class name="com.saucedemo.tests.CheckoutTest"/>-->
             <class name="com.saucedemo.tests.OverviewTest"/>
 <!--            <class name="com.saucedemo.tests.OrderCompleteTest"/>-->
         </classes>
@@ -19,10 +19,10 @@
 <!--    <test name="chrome-headless-tests" enabled="true">-->
 <!--        <parameter name="browser" value="chrome headless"/>-->
 <!--        <classes>-->
-<!--            <class name="com.saucedemo.tests.LoginTests"/>-->
-<!--            <class name="com.saucedemo.tests.ProductTests"/>-->
+<!--            <class name="com.saucedemo.tests.LoginTest"/>-->
+<!--            <class name="com.saucedemo.tests.ProductTest"/>-->
 <!--            <class name="com.saucedemo.tests.CartTest"/>-->
-<!--            <class name="com.saucedemo.tests.CheckoutTests"/>-->
+<!--            <class name="com.saucedemo.tests.CheckoutTest"/>-->
 <!--            <class name="com.saucedemo.tests.OverviewTest"/>-->
 <!--            <class name="com.saucedemo.tests.OrderCompleteTest"/>-->
 <!--        </classes>-->

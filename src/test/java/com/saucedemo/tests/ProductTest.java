@@ -15,8 +15,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProductTests extends TestBase {
-    private static final Logger logger = LogManager.getLogger(ProductTests.class);
+public class ProductTest extends TestBase {
+    private static final Logger logger = LogManager.getLogger(ProductTest.class);
     @Test
     public void verifyAddToCartFunctionalityForOneProduct(){
         logger.info("Starting test: verifyAddToCartFunctionalityForOneProduct");
